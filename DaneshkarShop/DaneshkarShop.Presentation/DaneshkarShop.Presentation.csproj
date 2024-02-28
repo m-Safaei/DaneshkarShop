@@ -18,4 +18,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DaneshkarShop.Application\DaneshkarShop.Application.csproj" />
+  </ItemGroup>
+
 </Project>
