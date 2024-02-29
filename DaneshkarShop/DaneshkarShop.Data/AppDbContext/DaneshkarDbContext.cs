@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DaneshkarShop.Domain.Entities.User;
+using Microsoft.EntityFrameworkCore;
 
 namespace DaneshkarShop.Data.AppDbContext;
 
@@ -6,14 +7,17 @@ public class DaneshkarDbContext : DbContext
 {
     #region Ctor
 
-    public DaneshkarDbContext(DbContextOptions<DaneshkarDbContext> options) : base(options)
+    public DaneshkarDbContext(DbContextOptions<DaneshkarDbContext> options) 
+        : base(options)
     {
 
     }
 
+
     #endregion
 
     #region Db Sets
+    public DbSet<User> Users { get; set; }
 
     #endregion
 
@@ -26,9 +30,8 @@ public class DaneshkarDbContext : DbContext
             .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
 
         foreach (var fk in cascadeFKs)
-        {
             fk.DeleteBehavior = DeleteBehavior.Restrict;
-        }
+
 
         base.OnModelCreating(modelBuilder);
     }

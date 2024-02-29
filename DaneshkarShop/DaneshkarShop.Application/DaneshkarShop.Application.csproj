@@ -7,10 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\AdminSide\" />
+    <Folder Include="DTOs\UserSide\" />
     <Folder Include="Utilities\" />
-    <Folder Include="Services\Interface\" />
-    <Folder Include="Services\Implementation\" />
   </ItemGroup>
 
   <ItemGroup>
