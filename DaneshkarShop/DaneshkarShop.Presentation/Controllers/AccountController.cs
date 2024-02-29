@@ -31,23 +31,16 @@ public class AccountController : Controller
     {
         if (ModelState.IsValid)
         {
-            if (_userService.DoesExistUserByMobile(userDTO.Mobile) == false)
+            bool result = _userService.RegisterUser(userDTO);
+            if (result)
             {
-                //Object Mapping
-                User1 user = new()
-                {
-                    UserName = userDTO.UserName,
-                    Mobile = userDTO.Mobile.Trim(),
-                    Password = PasswordHelper.EncodePasswordMd5(userDTO.Password)
-                };
-                //Add User to Database
-                _context.Users.Add(user);
-                _context.SaveChanges();
-
                 return RedirectToAction("Index", "Home");
-            }
 
+            }
+            
         }
+
+        TempData["ErrorMessage"] = "کاربری با شماره موبایل وارد شده در سیستم وجود دارد.";
         return View();
     }
 
