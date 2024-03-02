@@ -30,9 +30,10 @@ namespace DaneshkarShop.Application.Services.Implementation
             //Object Mapping
             User user = new()
             {
-                Username = userDTO.UserName,
+                Username = userDTO.Mobile,
                 Mobile = userDTO.Mobile.Trim(),
-                Password = PasswordHelper.EncodePasswordMd5(userDTO.Password)
+                Password = PasswordHelper.EncodePasswordMd5(userDTO.Password),
+                CreateDate = DateTime.Now
             };
             return user;
         }
@@ -58,6 +59,22 @@ namespace DaneshkarShop.Application.Services.Implementation
             AddUser(user);
 
             return true;
+        }
+
+        public bool LoginUser(UserLoginDTO loginDto)
+        {
+            //Get User By Mobile
+            var user = _userRepository.GetUserByMobile(loginDto.Mobile);
+            if (user == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public User? GetUserByMobile(string mobile)
+        {
+            return _userRepository.GetUserByMobile(mobile);
         }
     }
 }

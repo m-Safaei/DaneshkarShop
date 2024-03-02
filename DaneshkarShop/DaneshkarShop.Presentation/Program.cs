@@ -1,6 +1,11 @@
 using DaneshkarShop.Data.AppDbContext;
 using Microsoft.EntityFrameworkCore;
 using System;
+using DaneshkarShop.Application.Services.Implementation;
+using DaneshkarShop.Application.Services.Interface;
+using DaneshkarShop.Data.Repositories;
+using DaneshkarShop.Domain.IRepositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace DaneshkarShop.Presentation
 {
@@ -15,6 +20,8 @@ namespace DaneshkarShop.Presentation
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             #region Context
             
@@ -24,7 +31,26 @@ namespace DaneshkarShop.Presentation
             });
 
             #endregion
-            
+
+            #region Authentication
+
+            builder.Services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                })
+                // Add Cookie settings
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    options.LogoutPath = "/Logout";
+                    options.ExpireTimeSpan = TimeSpan.FromDays(30);
+                });
+
+            #endregion
+
             var app = builder.Build();
 
 

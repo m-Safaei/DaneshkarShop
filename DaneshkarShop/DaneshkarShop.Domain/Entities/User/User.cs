@@ -1,4 +1,7 @@
-﻿namespace DaneshkarShop.Domain.Entities.User;
+﻿using System.Collections.ObjectModel;
+using DaneshkarShop.Domain.Entities.Role;
+
+namespace DaneshkarShop.Domain.Entities.User;
 
 public class User
 {
@@ -20,9 +23,9 @@ public class User
 
 
     //Relations:
-    #region Navigation Properties 
+    #region Navigation Properties(relations) 
 
-    
+    public ICollection<UserSelectedRole> UserSelectedRoles { get; set; }
 
     #endregion
 }

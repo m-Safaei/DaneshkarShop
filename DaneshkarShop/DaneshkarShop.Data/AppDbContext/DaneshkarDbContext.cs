@@ -1,4 +1,5 @@
-﻿using DaneshkarShop.Domain.Entities.User;
+﻿using DaneshkarShop.Domain.Entities.Role;
+using DaneshkarShop.Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace DaneshkarShop.Data.AppDbContext;
@@ -18,6 +19,10 @@ public class DaneshkarDbContext : DbContext
 
     #region Db Sets
     public DbSet<User> Users { get; set; }
+
+    public DbSet<Role> Roles { get; set; }
+
+    public DbSet<UserSelectedRole> UserSelectedRoles { get; set; }
 
     #endregion
 

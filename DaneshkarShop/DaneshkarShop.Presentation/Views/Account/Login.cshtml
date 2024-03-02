@@ -1,7 +1,5 @@
-﻿@model DaneshkarShop.Application.DTOs.SiteSide.Account.UserRegisterDTO
-
+﻿@model DaneshkarShop.Application.DTOs.SiteSide.Account.UserLoginDTO
 @{
-    ViewData["Title"] = "ثبت نام ";
     Layout = null;
 }
 
@@ -12,7 +10,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>ثبت نام </title>
+    <title>ورود </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Premium Bootstrap 5 Landing Page Template" />
     <meta name="keywords" content="Saas, Software, multi-uses, HTML, Clean, Modern" />
@@ -40,8 +38,8 @@
 <body>
 
 
-    <div class="back-to-home  d-none d-sm-block">
-        <a href="/" class="btn btn-icon form-btn  rounded-0" style="background-color:#D92626;color:#fff"><i data-feather="home" class="icons"></i></a>
+    <div class="back-to-home d-none d-sm-block">
+        <a href="/" class="btn btn-icon rounded-0 " style="background-color:#D92626;color:#fff"><i data-feather="home" class="icons"></i></a>
     </div>
 
     <!-- شوع آن -->
@@ -49,38 +47,28 @@
         <div class="container-fluid px-0">
             <div class="row g-0 position-relative">
                 <div class="col-lg-4 cover-my-30 order-2">
-                    <div class="cover-user-img d-lg-flex align-items-center">
+                    <div class="cover-user-img d-flex align-items-center">
                         <div class="row">
                             <div class="col-12">
-                                <div class="card border-0" style="z-index: 1">
+                                <div class="card login-page border-0" style="z-index: 1">
                                     <div class="card-body p-0">
-                                        <h4 class="card-title text-center" style="font-family: yekanBakhtRegular;">ثبت نام </h4>
-                                        <form class="login-form mt-4" asp-controller="Account" asp-action="Register">
-
-
-                                            @if (User.Identity.IsAuthenticated && Context.Request.Query["ReturnUrl"] != "")
-                                            {
-                                                <div class="alert alert-danger mt-3" style="font-family: yekanBakhtRegular;">
-                                                    <p>کاربر گرامی @User.Identity.Name  شما مجوز ورود به بخش درخواست شده را ندارید.</p>
-                                                </div>
-
-                                            }
-
-
+                                        <h4 class="card-title text-center" style="font-family: yekanBakhtRegular;">وارد شدن </h4>
+                                        <form class="login-form mt-4" asp-action="Login" asp-controller="Account">
+                                            <input type="hidden" name="ReturnUrl" value="@ViewBag.Return" />
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-lg-12">
                                                     <div class="mb-3">
-                                                        <label class="form-label" style="font-family: yekanBakhtRegular;">موبایل شما <span class="text-danger">*</span></label>
+                                                        <label class="form-label" style="font-family: yekanBakhtRegular;">موبایل کاربر <span class="text-danger">*</span></label>
                                                         <div class="form-icon position-relative">
                                                             <i data-feather="user" class="fea icon-sm icons"></i>
-                                                            <input style="font-family: yekanBakhtRegular;" type="text" class="form-control ps-5  rounded-0" placeholder="موبایل" asp-for="Mobile" required="">
+                                                            <input style="font-family: yekanBakhtRegular;" type="text" class="form-control ps-5  rounded-0" placeholder="موبایل کاربر" asp-for="Mobile" required="">
                                                             <span style="color:red" asp-validation-for="Mobile"></span>
 
                                                         </div>
                                                     </div>
                                                 </div><!--end col-->
 
-                                                <div class="col-md-6">
+                                                <div class="col-lg-12">
                                                     <div class="mb-3">
                                                         <label class="form-label" style="font-family: yekanBakhtRegular;">رمز عبور  <span class="text-danger">*</span></label>
                                                         <div class="form-icon position-relative">
@@ -92,35 +80,26 @@
                                                     </div>
                                                 </div><!--end col-->
 
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" style="font-family: yekanBakhtRegular;"> تکرار رمز عبور  <span class="text-danger">*</span></label>
-                                                        <div class="form-icon position-relative">
-                                                            <i data-feather="key" class="fea icon-sm icons"></i>
-                                                            <input type="password" style="font-family: yekanBakhtRegular;" class="form-control ps-5  rounded-0" asp-for="RePassword" placeholder="رمز عبور " required="">
-                                                            <span style="color:red" asp-validation-for="RePassword"></span>
-
-                                                        </div>
-                                                    </div>
-                                                </div><!--end col-->
-
-
                                                 <div class="col-lg-12 mb-0">
                                                     <div class="d-grid">
-                                                        <button class="btn form-btn rounded-0" style="font-family: yekanBakhtRegular;background-color:#D92626;color:#fff">ثبت نام </button>
+                                                        <button class="btn form-btn rounded-0" style="font-family: yekanBakhtRegular;background-color:#D92626;color:#fff">ورود </button>
                                                     </div>
                                                 </div><!--end col-->
 
 
+                                                <div class="col-12 text-center">
+                                                    <p class="mb-0 mt-3" style="font-family: yekanBakhtRegular;"><small class="text-dark me-2">حسابی ندارید؟ </small> <a href="/Register" class="text-dark fw-bold">ثبت نام کنید </a></p>
+                                                </div><!--end col-->
 
-                                                <div class="mx-auto">
-                                                    <p style="font-family: yekanBakhtRegular;" class="mb-0 mt-3"><small class="text-dark me-2">قبلاً حساب دارید؟</small> <a href="/Login" class="text-dark fw-bold">وارد شوید </a></p>
-                                                </div>
+                                                <div class="col-12 text-center">
+                                                    <p class="mb-0 mt-3" style="font-family: yekanBakhtRegular;"><small class="text-dark me-2"> </small> <a href="/ForgotPassword" class="text-dark fw-bold">فراموشی رمز عبور؟ </a></p>
+                                                </div><!--end col-->
+
                                             </div><!--end row-->
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            </div><!--end col-->
                         </div><!--end row-->
                     </div> <!-- end about detail -->
                 </div> <!-- end col -->
@@ -147,8 +126,6 @@
     <script src="~/common/custom/custom.js"></script>
 
     <partial name="_Notification" />
-
-
 </body>
 
 </html>

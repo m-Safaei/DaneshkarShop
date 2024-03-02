@@ -9,8 +9,6 @@ namespace DaneshkarShop.Application.DTOs.SiteSide.Account
 {
     public class UserRegisterDTO
     {
-        public string UserName { get; set; }
-
         public string Mobile { get; set; }
 
         [DataType(DataType.Password)]

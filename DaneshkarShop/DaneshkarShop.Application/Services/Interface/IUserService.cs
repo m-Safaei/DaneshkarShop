@@ -12,5 +12,7 @@ namespace DaneshkarShop.Application.Services.Interface
         void AddUser(User user);
 
         bool RegisterUser(UserRegisterDTO userDTO);
+
+        User? GetUserByMobile(string mobile);
     }
 }

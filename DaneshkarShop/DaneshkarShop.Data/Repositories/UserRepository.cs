@@ -33,5 +33,10 @@ public class UserRepository : IUserRepository
     {
         _context.SaveChanges();
     }
+
+    public User? GetUserByMobile(string mobile)
+    {
+        return _context.Users.SingleOrDefault(p => p.IsDelete == false && p.Mobile == mobile);
+    }
 }
 

@@ -9,5 +9,6 @@ public interface IUserRepository
     void AddUser(User user);
 
     void SaveChange();
+    User? GetUserByMobile(string mobile);
 }
 
