@@ -1,14 +1,10 @@
 ﻿using DaneshkarShop.Application.Services.Interface;
-using DaneshkarShop.Application.Utilities;
-using DaneshkarShop.Domain.Entities.Role;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DaneshkarShop.Presentation.Areas.Admin.Controllers;
 
-[Area("Admin")]
-[Authorize]
-public class HomeController : Controller
+
+public class HomeController : AdminBaseController
 {
 
     #region Ctor
@@ -24,25 +20,25 @@ public class HomeController : Controller
     public IActionResult Index()
     {
 
-        #region Check User Access
+        //#region Check User Access
 
-        bool permission = false;
+        //bool permission = false;
 
-        var userId = (int)User.GetUserId();
+        //var userId = (int)User.GetUserId();
 
-        List<Role> roles = _roleService.GetUserRolesByUserId(userId);
+        //List<Role> roles = _roleService.GetUserRolesByUserId(userId);
 
-        foreach (var role in roles)
-        {
-            if (role.RoleUniqueName == "Admin")
-            {
-                permission = true;
-            }
-        }
+        //foreach (var role in roles)
+        //{
+        //    if (role.RoleUniqueName == "Admin")
+        //    {
+        //        permission = true;
+        //    }
+        //}
 
-        if (permission == false) return RedirectToAction("Index", "Home");
+        //if (permission == false) return RedirectToAction("Index", "Home");
 
-        #endregion
+        //#endregion
 
         return View();
     }

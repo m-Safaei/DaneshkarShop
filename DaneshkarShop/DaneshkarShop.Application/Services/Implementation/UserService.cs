@@ -20,6 +20,9 @@ namespace DaneshkarShop.Application.Services.Implementation
 
 
         #endregion
+
+        #region General Methods
+
         public bool DoesExistUserByMobile(string mobile)
         {
             return _userRepository.DoesExistUserByMobile(mobile.Trim());
@@ -76,5 +79,16 @@ namespace DaneshkarShop.Application.Services.Implementation
         {
             return _userRepository.GetUserByMobile(mobile);
         }
+
+        #endregion
+
+        #region Admin Side Methods
+
+        public List<User> ListOfUsers()
+        {
+            return _userRepository.ListOfUsers();
+        }
+
+        #endregion
     }
 }
