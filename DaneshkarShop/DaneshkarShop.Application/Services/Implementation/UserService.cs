@@ -143,7 +143,7 @@ namespace DaneshkarShop.Application.Services.Implementation
         {
             #region Get User by Id
 
-            var user = await _userRepository.GetUserByIdAsync(userId);
+            var user = await _userRepository.GetUserByIdAsync(userId, cancellation);
             if (user == null) return null;
 
             #endregion

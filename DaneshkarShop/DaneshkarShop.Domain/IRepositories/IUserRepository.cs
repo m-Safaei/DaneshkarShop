@@ -14,7 +14,7 @@ public interface IUserRepository
     void SaveChange();
     User? GetUserByMobile(string mobile);
     User? GetUserById(int userId);
-    Task<User?> GetUserByIdAsync(int userId);
+    Task<User?> GetUserByIdAsync(int userId,CancellationToken cancellation);
     void UpdateUser(User user);
     #endregion
 
