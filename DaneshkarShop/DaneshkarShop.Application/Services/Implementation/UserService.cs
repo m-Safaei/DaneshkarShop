@@ -1,6 +1,8 @@
-﻿using DaneshkarShop.Application.DTOs.SiteSide.Account;
+﻿using DaneshkarShop.Application.DTOs.AdminSide.User;
+using DaneshkarShop.Application.DTOs.SiteSide.Account;
 using DaneshkarShop.Application.Services.Interface;
 using DaneshkarShop.Application.Utilities;
+using DaneshkarShop.Domain.Entities.Role;
 using DaneshkarShop.Domain.Entities.User;
 using DaneshkarShop.Domain.IRepositories;
 
@@ -12,10 +14,12 @@ namespace DaneshkarShop.Application.Services.Implementation
         #region Ctor
 
         private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IRoleRepository roleRepository)
         {
             _userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
 
 
@@ -89,6 +93,138 @@ namespace DaneshkarShop.Application.Services.Implementation
             return _userRepository.ListOfUsers();
         }
 
+        //public List<ListOfUsersDTO> ListOfUsersDTO()
+        //{
+        //    _userRepository.
+        //}
+
+        public List<ListOfUsersDTO> ListOfUsersDTO()
+        {
+            return _userRepository.QueryableUsers()
+                                  .OrderByDescending(p => p.CreateDate)
+                                  .Select(p => new ListOfUsersDTO()
+                                  {
+                                      Username = p.Username,
+                                      Mobile = p.Mobile,
+                                      CreateDate = p.CreateDate,
+                                      UserId = p.UserId,
+                                      UserAvatar = p.UserAvatar
+                                  }).ToList();
+        }
+
+        public EditUserAdminSideDTO FillEditUserAdminSideDTO(int userId)
+        {
+            #region Get User by Id
+
+            var user = _userRepository.GetUserById(userId);
+            if (user == null) return null;
+
+            #endregion
+
+            #region Fill DTO
+
+            EditUserAdminSideDTO model = new()
+            {
+                Mobile = user.Mobile,
+                //SuperAdmin = user.SuperAdmin,
+                UserId = userId,
+                Username = user.Username,
+                UserOriginalAvatar = user.UserAvatar,
+                //Get User Roles:
+                CurrentUserRolesId = _userRepository.GetListOfUserRolesIdByUserId(userId)
+
+            };
+
+            #endregion
+
+            return model;
+        }
+        public async Task<EditUserAdminSideDTO> FillEditUserAdminSideDTOAsync(int userId, CancellationToken cancellation)
+        {
+            #region Get User by Id
+
+            var user = await _userRepository.GetUserByIdAsync(userId);
+            if (user == null) return null;
+
+            #endregion
+
+            #region Fill DTO
+
+            EditUserAdminSideDTO model = new()
+            {
+                Mobile = user.Mobile,
+                //SuperAdmin = user.SuperAdmin,
+                UserId = userId,
+                Username = user.Username,
+                UserOriginalAvatar = user.UserAvatar,
+                //Get User Roles:
+                CurrentUserRolesId = await _userRepository.GetListOfUserRolesIdByUserIdAsync(userId, cancellation)
+
+            };
+
+            #endregion
+
+            return model;
+        }
+
+        public bool EditUserAdminSide(EditUserAdminSideDTO model, List<int> selectedRoles)
+        {
+            #region Get User by Id
+
+            var userOrigin = _userRepository.GetUserById(model.UserId);
+            if (userOrigin == null) return false;
+
+            #endregion
+
+            #region Update Properties
+
+            userOrigin.Mobile = model.Mobile;
+            userOrigin.Username = model.Username;
+
+            if (model.UserAvatar != null)
+            {
+                //Save New Image
+                userOrigin.UserAvatar = NameGenerator.GenerateUniqCode() + Path.GetExtension(model.UserAvatar.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/UserAvatar", userOrigin.UserAvatar);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    model.UserAvatar.CopyTo(stream);
+                }
+
+            }
+
+            #endregion
+
+            #region Update User Roles
+
+            //Delete list of userSelectedRoles:
+            List<UserSelectedRole> userSelectedRoles = _userRepository.GetListOfUserSelectedRolesByUserId(model.UserId);
+            if (userSelectedRoles.Any())
+            {
+
+                _userRepository.DeleteRangeOfUserSelectedRoles(userSelectedRoles);
+            }
+
+            if (selectedRoles != null && selectedRoles.Any())
+            {
+                foreach (var roleId in selectedRoles)
+                {
+                    UserSelectedRole userSelectedRole = new()
+                    {
+                        RoleId = roleId,
+                        UserId = model.UserId
+                    };
+
+                    _roleRepository.AddUserSelectedRoleData(userSelectedRole);
+                }
+            }
+
+            #endregion
+
+            _userRepository.UpdateUser(userOrigin);
+            _userRepository.SaveChange();
+            return true;
+        }
         #endregion
     }
 }

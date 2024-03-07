@@ -1,4 +1,5 @@
-﻿using DaneshkarShop.Application.DTOs.SiteSide.Account;
+﻿using DaneshkarShop.Application.DTOs.AdminSide.User;
+using DaneshkarShop.Application.DTOs.SiteSide.Account;
 using DaneshkarShop.Domain.Entities.User;
 
 namespace DaneshkarShop.Application.Services.Interface
@@ -23,6 +24,10 @@ namespace DaneshkarShop.Application.Services.Interface
         #region Admin Side Methods
 
         List<User> ListOfUsers();
+        List<ListOfUsersDTO> ListOfUsersDTO();
+        EditUserAdminSideDTO FillEditUserAdminSideDTO(int userId);
+        Task<EditUserAdminSideDTO> FillEditUserAdminSideDTOAsync(int userId, CancellationToken cancellation);
+        bool EditUserAdminSide(EditUserAdminSideDTO model, List<int> selectedRoles);
 
         #endregion
     }

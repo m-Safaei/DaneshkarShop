@@ -22,6 +22,15 @@ public class RoleService : IRoleService
 
     #endregion
 
+    public List<Role> GetListOfRoles()
+    {
+        return _roleRepository.GetListOfRoles();
+    }
+    public async Task<List<Role>> GetListOfRolesAsync(CancellationToken cancellationToken)
+    {
+        return await _roleRepository.GetListOfRolesAsync(cancellationToken);
+    }
+
     public List<Role> GetUserRolesByUserId(int userId)
     {
         return _roleRepository.GetUserRolesByUserId(userId);
