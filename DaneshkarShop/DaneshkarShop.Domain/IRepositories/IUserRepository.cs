@@ -21,6 +21,7 @@ public interface IUserRepository
 
     #region Admin Side Methods
 
+    Task<int> GetCountOfActiveUsers(CancellationToken cancellation);
     List<User> ListOfUsers();
     IQueryable<User> QueryableUsers();
     List<int> GetListOfUserRolesIdByUserId(int userId);

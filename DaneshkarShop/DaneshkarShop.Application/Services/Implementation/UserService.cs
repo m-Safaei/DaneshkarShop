@@ -1,4 +1,5 @@
-﻿using DaneshkarShop.Application.DTOs.AdminSide.User;
+﻿using DaneshkarShop.Application.DTOs.AdminSide.LandingPage;
+using DaneshkarShop.Application.DTOs.AdminSide.User;
 using DaneshkarShop.Application.DTOs.SiteSide.Account;
 using DaneshkarShop.Application.Services.Interface;
 using DaneshkarShop.Application.Utilities;
@@ -88,6 +89,15 @@ namespace DaneshkarShop.Application.Services.Implementation
 
         #region Admin Side Methods
 
+        public async Task<LandingPageModelDTO?> FillLandingPageModelDTO(CancellationToken cancellationToken)
+        {
+            LandingPageModelDTO res = new()
+            {
+                CountOfActiveUsers = await _userRepository.GetCountOfActiveUsers(cancellationToken)
+            };
+
+            return res;
+        }
         public List<User> ListOfUsers()
         {
             return _userRepository.ListOfUsers();

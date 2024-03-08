@@ -1,4 +1,5 @@
-﻿using DaneshkarShop.Application.DTOs.AdminSide.User;
+﻿using DaneshkarShop.Application.DTOs.AdminSide.LandingPage;
+using DaneshkarShop.Application.DTOs.AdminSide.User;
 using DaneshkarShop.Data.AppDbContext;
 using DaneshkarShop.Domain.Entities.Role;
 using DaneshkarShop.Domain.Entities.User;
@@ -66,6 +67,13 @@ public class UserRepository : IUserRepository
 
     #region Admin Side methods
 
+    public async Task<int> GetCountOfActiveUsers(CancellationToken cancellation)
+    {
+        return await _context.Users.AsNoTracking()
+                                    .Where(p => !p.IsDelete)
+                                    .CountAsync(cancellation);
+
+    }
     public List<User> ListOfUsers()
     {
 

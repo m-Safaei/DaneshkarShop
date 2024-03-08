@@ -27,4 +27,12 @@
     <ProjectReference Include="..\DaneshkarShop.Data\DaneshkarShop.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Shared\Components\UserInformation\UserInformation.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Shared\Components\UserInformation\UserInformation.cshtml" />
+  </ItemGroup>
+
 </Project>
