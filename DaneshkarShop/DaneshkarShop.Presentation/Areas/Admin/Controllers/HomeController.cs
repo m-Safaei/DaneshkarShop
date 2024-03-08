@@ -1,13 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DaneshkarShop.Application.Services.Interface;
+using Microsoft.AspNetCore.Mvc;
 
-namespace DaneshkarShop.Presentation.Areas.Admin.Controllers
+namespace DaneshkarShop.Presentation.Areas.Admin.Controllers;
+
+
+public class HomeController : AdminBaseController
 {
-    [Area("Admin")]
-    public class HomeController : Controller
+
+    #region Ctor
+
+    private readonly IRoleService _roleService;
+    private readonly IUserService _userService;
+
+    public HomeController(IRoleService roleService,IUserService userService)
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        _roleService = roleService;
+        _userService = userService;
+    }
+
+    #endregion
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    {
+
+        return View(await _userService.FillLandingPageModelDTO(cancellationToken));
     }
 }
+
