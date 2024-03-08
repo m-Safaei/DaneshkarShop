@@ -225,6 +225,27 @@ namespace DaneshkarShop.Application.Services.Implementation
             _userRepository.SaveChange();
             return true;
         }
+
+        public async Task<bool> DeleteUserAsync(int userId, CancellationToken cancellationToken)
+        {
+            #region Get User by Id
+
+            var user = await _userRepository.GetUserByIdAsync(userId, cancellationToken);
+            if (user == null || user.IsDelete) return false;
+
+            #endregion
+
+            #region Remove User
+
+            user.IsDelete = true;
+
+            _userRepository.UpdateUser(user);
+            await _userRepository.SaveChangeAsync(cancellationToken);
+
+            #endregion
+
+            return true;
+        }
         #endregion
     }
 }

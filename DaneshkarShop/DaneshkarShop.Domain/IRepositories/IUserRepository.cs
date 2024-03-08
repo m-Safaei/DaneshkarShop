@@ -12,6 +12,7 @@ public interface IUserRepository
     void AddUser(User user);
 
     void SaveChange();
+    Task SaveChangeAsync(CancellationToken cancellationToken);
     User? GetUserByMobile(string mobile);
     User? GetUserById(int userId);
     Task<User?> GetUserByIdAsync(int userId,CancellationToken cancellation);

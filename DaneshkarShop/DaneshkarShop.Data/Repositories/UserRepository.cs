@@ -39,6 +39,11 @@ public class UserRepository : IUserRepository
         _context.SaveChanges();
     }
 
+    public async Task SaveChangeAsync(CancellationToken cancellationToken)
+    {
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+
     public User? GetUserByMobile(string mobile)
     {
         return _context.Users.SingleOrDefault(p => p.IsDelete == false && p.Mobile == mobile);

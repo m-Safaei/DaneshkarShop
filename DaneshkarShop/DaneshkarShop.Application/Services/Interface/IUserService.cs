@@ -28,6 +28,7 @@ namespace DaneshkarShop.Application.Services.Interface
         EditUserAdminSideDTO FillEditUserAdminSideDTO(int userId);
         Task<EditUserAdminSideDTO> FillEditUserAdminSideDTOAsync(int userId, CancellationToken cancellation);
         bool EditUserAdminSide(EditUserAdminSideDTO model, List<int> selectedRoles);
+        Task<bool> DeleteUserAsync(int userId, CancellationToken cancellationToken);
 
         #endregion
     }

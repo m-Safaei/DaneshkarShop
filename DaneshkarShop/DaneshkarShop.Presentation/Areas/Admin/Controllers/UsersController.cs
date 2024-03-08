@@ -1,6 +1,7 @@
 ﻿using DaneshkarShop.Application.DTOs.AdminSide.User;
 using DaneshkarShop.Application.Services.Interface;
 using DaneshkarShop.Domain.Entities.User;
+using DaneshkarShop.Presentation.HttpManager;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DaneshkarShop.Presentation.Areas.Admin.Controllers;
@@ -88,6 +89,21 @@ public class UsersController : AdminBaseController
         #endregion
 
         return View(userInfo);
+    }
+
+    #endregion
+
+    #region Delete User
+
+    public async Task<IActionResult> DeleteUser(int userId,CancellationToken cancellationToken)
+    {
+        var res = await _userService.DeleteUserAsync(userId, cancellationToken);
+        if (res)
+        {
+            return ApiResponse.SetResponse(ApiResponseStatus.Success,null,"عملیات با موفقیت انجام شد.");
+        }
+
+        return ApiResponse.SetResponse(ApiResponseStatus.Danger,null,"عملیات با شکست مواجه شده است.");
     }
 
     #endregion
