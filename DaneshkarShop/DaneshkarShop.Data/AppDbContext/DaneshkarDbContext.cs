@@ -1,4 +1,5 @@
-﻿using DaneshkarShop.Domain.Entities.Role;
+﻿using DaneshkarShop.Domain.Entities.ContactUs;
+using DaneshkarShop.Domain.Entities.Role;
 using DaneshkarShop.Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,8 @@ public class DaneshkarDbContext : DbContext
     public DbSet<Role> Roles { get; set; }
 
     public DbSet<UserSelectedRole> UserSelectedRoles { get; set; }
+
+    public DbSet<ContactUs> ContactUs { get; set; }
 
     #endregion
 

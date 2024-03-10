@@ -52,9 +52,14 @@ public class AccountController : Controller
     #region Login
 
     [HttpGet]
-    public IActionResult Login()
+    public IActionResult Login(string? ReturnUrl)
     {
-        return View();
+        UserLoginDTO returnModel = new UserLoginDTO();
+        if (!string.IsNullOrEmpty(ReturnUrl))
+        {
+            returnModel.ReturnUrl = ReturnUrl;
+        }
+        return View(returnModel);
     }
 
     [HttpPost, ValidateAntiForgeryToken]
@@ -82,6 +87,10 @@ public class AccountController : Controller
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProps);
 
+                if (!string.IsNullOrEmpty(userDTO.ReturnUrl))
+                {
+                    return Redirect(userDTO.ReturnUrl);
+                }
 
                 return RedirectToAction("Index", "Home");
 
@@ -96,8 +105,13 @@ public class AccountController : Controller
 
     #region Logout
 
+    [HttpGet("Logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync();
 
-
+        return RedirectToAction("Index", "Home");
+    }
     #endregion
 }
 
