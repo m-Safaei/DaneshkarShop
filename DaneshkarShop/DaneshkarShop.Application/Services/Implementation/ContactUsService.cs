@@ -1,5 +1,5 @@
-﻿using DaneshkarShop.Application.DTOs.SiteSide.ContactUs;
-using DaneshkarShop.Application.Services.Interface;
+﻿using DaneshkarShop.Application.Services.Interface;
+using DaneshkarShop.Domain.DTOs.SiteSide.ContactUs;
 using DaneshkarShop.Domain.Entities.ContactUs;
 using DaneshkarShop.Domain.IRepositories;
 
@@ -29,6 +29,31 @@ public class ContactUsService : IContactUsService
         };
         await _contactUsRepository.AddContactUsToDatabase(model);
         await _contactUsRepository.SaveChangeAsync();
+    }
+
+    public async Task<List<ContactUs>> GetListOfContactUs()
+    {
+        return await _contactUsRepository.GetListOfContactUs();
+    }
+
+    public async Task<ContactUs?> GetContactUsById(int id)
+    {
+        return await _contactUsRepository.GetContactUsById(id);
+    }
+
+    public async Task<bool> DeleteContactUs(int id)
+    {
+        //Get ContactUs by id
+        var contactUs = await GetContactUsById(id);
+        if (contactUs == null) return false;
+        
+        //Delete ContactUS
+        _contactUsRepository.DeleteContactUs(contactUs);
+
+        //SaveChange method
+        await _contactUsRepository.SaveChangeAsync();
+        return true;
+
     }
 }
 

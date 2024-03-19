@@ -1,6 +1,6 @@
-﻿using DaneshkarShop.Application.DTOs.AdminSide.LandingPage;
-using DaneshkarShop.Application.DTOs.AdminSide.User;
-using DaneshkarShop.Application.DTOs.SiteSide.Account;
+﻿using DaneshkarShop.Domain.DTOs.AdminSide.LandingPage;
+using DaneshkarShop.Domain.DTOs.AdminSide.User;
+using DaneshkarShop.Domain.DTOs.SiteSide.Account;
 using DaneshkarShop.Application.Services.Interface;
 using DaneshkarShop.Application.Utilities;
 using DaneshkarShop.Domain.Entities.Role;

@@ -1,6 +1,7 @@
 ﻿using DaneshkarShop.Data.AppDbContext;
 using DaneshkarShop.Domain.Entities.ContactUs;
 using DaneshkarShop.Domain.IRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace DaneshkarShop.Data.Repositories;
 
@@ -26,6 +27,21 @@ public class ContactUsRepository : IContactUsRepository
     {
         await _context.ContactUs.AddAsync(contactUs);
 
+    }
+
+    public async Task<List<ContactUs>> GetListOfContactUs()
+    {
+        return await _context.ContactUs.ToListAsync();
+    }
+
+    public async Task<ContactUs?> GetContactUsById(int id)
+    {
+        return await _context.ContactUs.FirstOrDefaultAsync(p => p.Id == id);
+    }
+
+    public void DeleteContactUs(ContactUs contactUs)
+    {
+        _context.ContactUs.Remove(contactUs);
     }
 }
 

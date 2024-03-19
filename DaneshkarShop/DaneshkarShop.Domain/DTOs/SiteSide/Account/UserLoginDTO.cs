@@ -1,4 +1,4 @@
-﻿namespace DaneshkarShop.Application.DTOs.SiteSide.Account
+﻿namespace DaneshkarShop.Domain.DTOs.SiteSide.Account
 {
     public class UserLoginDTO
     {

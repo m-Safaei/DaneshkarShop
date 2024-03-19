@@ -1,4 +1,4 @@
-﻿namespace DaneshkarShop.Application.DTOs.AdminSide.User;
+﻿namespace DaneshkarShop.Domain.DTOs.AdminSide.User;
 
 public class ListOfUsersDTO
 {

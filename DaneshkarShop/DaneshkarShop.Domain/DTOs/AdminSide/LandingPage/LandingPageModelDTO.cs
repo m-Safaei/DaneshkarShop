@@ -1,4 +1,4 @@
-﻿namespace DaneshkarShop.Application.DTOs.AdminSide.LandingPage;
+﻿namespace DaneshkarShop.Domain.DTOs.AdminSide.LandingPage;
 
 public record LandingPageModelDTO
 {

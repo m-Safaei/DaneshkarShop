@@ -1,4 +1,4 @@
-﻿namespace DaneshkarShop.Application.DTOs.SiteSide.ContactUs;
+﻿namespace DaneshkarShop.Domain.DTOs.SiteSide.ContactUs;
 
 public class ContactUsDTO
 {

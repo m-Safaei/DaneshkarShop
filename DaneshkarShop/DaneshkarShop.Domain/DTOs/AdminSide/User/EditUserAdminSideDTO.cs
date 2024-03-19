@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace DaneshkarShop.Application.DTOs.AdminSide.User;
+namespace DaneshkarShop.Domain.DTOs.AdminSide.User;
 
 public record EditUserAdminSideDTO
 {

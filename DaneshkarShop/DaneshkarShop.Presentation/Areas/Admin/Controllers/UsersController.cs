@@ -1,6 +1,5 @@
-﻿using DaneshkarShop.Application.DTOs.AdminSide.User;
+﻿using DaneshkarShop.Domain.DTOs.AdminSide.User;
 using DaneshkarShop.Application.Services.Interface;
-using DaneshkarShop.Domain.Entities.User;
 using DaneshkarShop.Presentation.HttpManager;
 using Microsoft.AspNetCore.Mvc;
 

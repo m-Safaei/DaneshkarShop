@@ -1,8 +1,8 @@
 ﻿@using DaneshkarShop.Application.Utilities
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model List<DaneshkarShop.Domain.DTOs.AdminSide.User.ListOfUsersDTO>
+@model List<DaneshkarShop.Domain.Entities.ContactUs.ContactUs>
 @{
-    ViewData["Title"] = "لیست کاربران";
+    ViewData["Title"] = "لیست پیام‌های تماس باما";
 }
 
 @section Styls
@@ -90,12 +90,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>لیست کاربران</h1>
+                    <h1>لیست پیام‌های تماس باما</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item"><a href="/Admin">خانه</a></li>
-                        <li class="breadcrumb-item active">لیست کاربران</li>
+                        <li class="breadcrumb-item active">لیست پیام‌های تماس باما</li>
                     </ol>
                 </div>
             </div>
@@ -117,13 +117,13 @@
                                     <thead>
                                         <tr role="row">
                                             @* <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width:10px;" aria-label="عکس  : activate to sort column ascending">عکس  </th>
- *@
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="موبایل : activate to sort column ascending">عکس پروفایل </th>
+                                            *@
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="موبایل : activate to sort column ascending"># </th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="نام کاربری  : activate to sort column descending">     نام کاربری</th>
 
 
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="موبایل : activate to sort column ascending">موبایل </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="موبایل : activate to sort column ascending">ثبت نام  </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="موبایل : activate to sort column ascending">تاریخ  </th>
 
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label=" activate to sort column ascending"></th>
                                         </tr>
@@ -132,48 +132,31 @@
 
                                         @foreach (var item in Model)
                                         {
-                                            <tr role="row" class="odd" remove-ajax-item="@item.UserId">
+                                            <tr role="row" class="odd" remove-ajax-item="@item.Id">
                                                 @* <td class="sorting_1">
-                                                    <img class="direct-chat-img" style="width:50px;height:50px;" src="/Images/UserAvatar/thumb/@item.UserAvatar" alt="message user image">
-                                                </td> *@
+                                            <img class="direct-chat-img" style="width:50px;height:50px;" src="/Images/UserAvatar/thumb/@item.UserAvatar" alt="message user image">
+                                            </td> *@
                                                 <td>
-                                                    @if (string.IsNullOrEmpty(item.UserAvatar))
-                                                    {
-                                                        <img style="width: 50px; height: 50px; border-radius: 100% !important;" id="imgAvatar" class="img-responsive rounded" src="/Images/UserAvatar/Defult.jpg" alt="upload_img">
-                                                    }
-                                                    else
-                                                    {
-                                                        <img style="width: 50px; height: 50px; border-radius: 100% !important;" id="imgAvatar" class="img-responsive rounded" src="/Images/UserAvatar/@item.UserAvatar" alt="upload_img">
-
-                                                    }
+                                                    @item.Id
                                                 </td>
                                                 <td>@item.Username</td>
                                                 <td>@item.Mobile</td>
-                                                <td>@item.CreateDate.ToShamsi()</td>
+                                                <td>تاریخ</td>
 
                                                 <td>
-
-                                                    <a class="btn btn-warning btn-sm waves-effect" asp-action="EditUser" asp-area="Admin" asp-controller="Users" asp-route-UserId="@item.UserId">
-                                                        <i class="glyphicon glyphicon-edit"></i>
-                                                        ویرایش
-                                                    </a>
-
-                                                    <a class="btn btn-info btn-sm waves-effect" asp-action="DetailUser" asp-area="Admin" asp-controller="Users" asp-route-UserId="@item.UserId">
+                                                    <a class="btn btn-info btn-sm waves-effect" asp-action="ContactUsDetail" asp-area="Admin" asp-controller="ContactUs" asp-route-Id="@item.Id">
                                                         <i class="glyphicon glyphicon-edit"></i>
                                                         اطلاعات
                                                     </a>
-                                                    <button onclick="DeleteAjax(@item.UserId, '@Url.Action("DeleteUser", "Users", new { area = "Admin", userId = item.UserId })')" class="btn btn-danger btn-sm waves-effect">
+                                                    <button onclick="DeleteAjax(@item.Id, '@Url.Action("DeleteContactUs", "ContactUs", new { area = "Admin", id = item.Id })')" class="btn btn-danger btn-sm waves-effect">
                                                         <i class="glyphicon glyphicon-trash"></i>
                                                         حذف
                                                     </button>
                                                     @* <a class="btn btn-danger btn-sm waves-effect" asp-action="Delete" asp-area="Admin" asp-controller="Users" asp-route-UserId="@item.UserId">
-                                                        <i class="glyphicon glyphicon-trash"></i>
-                                                        حذف
-                                                    </a> *@
-                                                    <a class="btn btn-warning btn-sm waves-effect" asp-action="Delete" asp-area="Admin" asp-controller="Users" asp-route-id="@item.UserId">
-                                                        <i class="glyphicon glyphicon-trash"></i>
-                                                        ورود با حساب
-                                                    </a>
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                                حذف
+                                                </a> *@
+                                                    
                                                 </td>
                                             </tr>
                                         }

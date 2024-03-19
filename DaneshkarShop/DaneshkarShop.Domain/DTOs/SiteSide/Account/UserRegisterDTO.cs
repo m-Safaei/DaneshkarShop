@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DaneshkarShop.Application.DTOs.SiteSide.Account
+namespace DaneshkarShop.Domain.DTOs.SiteSide.Account
 {
     public class UserRegisterDTO
     {

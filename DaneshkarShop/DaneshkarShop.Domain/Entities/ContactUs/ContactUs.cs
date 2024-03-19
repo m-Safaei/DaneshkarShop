@@ -15,6 +15,10 @@ public class ContactUs
     public string Mobile { get; set; }
 
     public string Message { get; set; }
+
+    public DateTime CreateDate { get; set; }
+
+    public bool IsSeen { get; set; }
     #endregion
 }
 

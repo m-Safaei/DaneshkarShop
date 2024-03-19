@@ -1,5 +1,5 @@
-﻿using DaneshkarShop.Application.DTOs.AdminSide.LandingPage;
-using DaneshkarShop.Application.DTOs.AdminSide.User;
+﻿using DaneshkarShop.Domain.DTOs.AdminSide.LandingPage;
+using DaneshkarShop.Domain.DTOs.AdminSide.User;
 using DaneshkarShop.Data.AppDbContext;
 using DaneshkarShop.Domain.Entities.Role;
 using DaneshkarShop.Domain.Entities.User;
@@ -87,24 +87,24 @@ public class UserRepository : IUserRepository
     {
 
         return _context.Users
-            .Where(p => !p.IsDelete);
+            .Where(p => !p.IsDelete).AsQueryable();
     }
 
-    //public List<ListOfUsersDTO> ListOfUsersWithDTO()
-    //{
-    //    var users = _context.Users
-    //                                   .Where(p => !p.IsDelete)
-    //                                   .OrderByDescending(p => p.CreateDate)
-    //                                   .Select(p => new ListOfUsersDTO()
-    //                                   {
-    //                                       Username = p.Username,
-    //                                       Mobile = p.Mobile,
-    //                                       CreateDate = p.CreateDate
-    //                                   })
-    //                                   .ToList();
-    //    return users;
+    public List<ListOfUsersDTO> ListOfUsersWithDTO()
+    {
+        var users = _context.Users
+                                       .Where(p => !p.IsDelete)
+                                       .OrderByDescending(p => p.CreateDate)
+                                       .Select(p => new ListOfUsersDTO()
+                                       {
+                                           Username = p.Username,
+                                           Mobile = p.Mobile,
+                                           CreateDate = p.CreateDate
+                                       })
+                                       .ToList();
+        return users;
 
-    //}
+    }
     public List<int> GetListOfUserRolesIdByUserId(int userId)
     {
         return _context.UserSelectedRoles

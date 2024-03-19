@@ -1,4 +1,4 @@
-﻿using DaneshkarShop.Application.DTOs.SiteSide.ContactUs;
+﻿using DaneshkarShop.Domain.DTOs.SiteSide.ContactUs;
 using DaneshkarShop.Application.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 

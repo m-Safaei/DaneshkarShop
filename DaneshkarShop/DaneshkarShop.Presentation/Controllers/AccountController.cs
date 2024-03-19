@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using DaneshkarShop.Application.DTOs.SiteSide.Account;
+using DaneshkarShop.Domain.DTOs.SiteSide.Account;
 using DaneshkarShop.Application.Services.Interface;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -112,6 +112,20 @@ public class AccountController : Controller
 
         return RedirectToAction("Index", "Home");
     }
+    #endregion
+
+    #region CheckUserRoleForLogin
+
+    public IActionResult ManageUserForLogin()
+    {
+        if (!User.Identity.IsAuthenticated)
+        {
+            return RedirectToAction(nameof(Login));
+        }
+
+        return RedirectToAction(nameof(Logout));
+    }
+
     #endregion
 }
 
