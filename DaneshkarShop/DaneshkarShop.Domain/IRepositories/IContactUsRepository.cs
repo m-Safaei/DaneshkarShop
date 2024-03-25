@@ -9,5 +9,6 @@ public interface IContactUsRepository
     Task<List<ContactUs>> GetListOfContactUs();
     Task<ContactUs?> GetContactUsById(int id);
     void DeleteContactUs(ContactUs contactUs);
+    void Update(ContactUs contactUs);
 }
 

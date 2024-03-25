@@ -46,13 +46,25 @@ public class ContactUsService : IContactUsService
         //Get ContactUs by id
         var contactUs = await GetContactUsById(id);
         if (contactUs == null) return false;
-        
+
         //Delete ContactUS
         _contactUsRepository.DeleteContactUs(contactUs);
 
         //SaveChange method
         await _contactUsRepository.SaveChangeAsync();
         return true;
+
+    }
+
+    public async Task ChangeMessageState(ContactUs contactUs, CancellationToken cancellationToken)
+    {
+
+        if (!contactUs.IsSeen)
+        {
+            contactUs.IsSeen =true;
+            _contactUsRepository.Update(contactUs);
+            await _contactUsRepository.SaveChangeAsync();
+        }
 
     }
 }

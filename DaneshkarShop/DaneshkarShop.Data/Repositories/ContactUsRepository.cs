@@ -43,5 +43,10 @@ public class ContactUsRepository : IContactUsRepository
     {
         _context.ContactUs.Remove(contactUs);
     }
+
+    public void Update(ContactUs contactUs)
+    {
+        _context.ContactUs.Update(contactUs);
+    }
 }
 

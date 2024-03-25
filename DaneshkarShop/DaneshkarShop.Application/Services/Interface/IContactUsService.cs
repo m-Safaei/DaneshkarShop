@@ -9,5 +9,6 @@ public interface IContactUsService
     Task<List<ContactUs>> GetListOfContactUs();
     Task<ContactUs?> GetContactUsById(int id);
     Task<bool> DeleteContactUs(int id);
+    Task ChangeMessageState(ContactUs contactUs, CancellationToken cancellationToken);
 }
 

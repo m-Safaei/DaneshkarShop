@@ -143,11 +143,21 @@
                                                 <td>@item.Username</td>
                                                 <td>@item.Mobile</td>
                                                 <td>@item.CreateDate.ToShamsi()</td>
+                                                <td>
+                                                    @if (item.IsSeen)
+                                                    {
+                                                        <p class="badge badge-success">دیده شده</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="badge badge-danger">دیده نشده</p>
+                                                    }
+                                                </td>
 
                                                 <td>
                                                     <a class="btn btn-info btn-sm waves-effect" asp-action="ContactUsDetail" asp-area="Admin" asp-controller="ContactUs" asp-route-Id="@item.Id">
                                                         <i class="glyphicon glyphicon-edit"></i>
-                                                        اطلاعات
+                                                        پیام
                                                     </a>
                                                     <button onclick="DeleteAjax(@item.Id, '@Url.Action("DeleteContactUs", "ContactUs", new { area = "Admin", id = item.Id })')" class="btn btn-danger btn-sm waves-effect">
                                                         <i class="glyphicon glyphicon-trash"></i>
@@ -157,7 +167,7 @@
                                                 <i class="glyphicon glyphicon-trash"></i>
                                                 حذف
                                                 </a> *@
-                                                    
+
                                                 </td>
                                             </tr>
                                         }
