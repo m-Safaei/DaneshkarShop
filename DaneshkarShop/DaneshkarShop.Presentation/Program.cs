@@ -26,7 +26,8 @@ namespace DaneshkarShop.Presentation
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();
             builder.Services.AddScoped<IContactUsService, ContactUsService>();
-
+            builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
             #region Context
             
             builder.Services.AddDbContext<DaneshkarDbContext>(options =>
