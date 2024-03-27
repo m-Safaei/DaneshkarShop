@@ -9,7 +9,7 @@ public class ProductCategoryRepository : IProductCategoryRepository
 {
 
     #region Ctor
-    
+
     private readonly DaneshkarDbContext _context;
 
     public ProductCategoryRepository(DaneshkarDbContext context)
@@ -26,9 +26,9 @@ public class ProductCategoryRepository : IProductCategoryRepository
         return await _context.ProductCategories.AsNoTracking().ToListAsync(cancellationToken);
     }
 
-    public async Task AddProductCategory(ProductCategory category,CancellationToken cancellation)
+    public async Task AddProductCategory(ProductCategory category, CancellationToken cancellation)
     {
-        await _context.ProductCategories.AddAsync(category,cancellation);
+        await _context.ProductCategories.AddAsync(category, cancellation);
     }
 
     public async Task SaveChanges(CancellationToken cancellation)
@@ -39,6 +39,18 @@ public class ProductCategoryRepository : IProductCategoryRepository
     public async Task<ProductCategory?> GetProductCategoryById(int categoryId, CancellationToken cancellation)
     {
         return await _context.ProductCategories.FirstOrDefaultAsync(p => p.Id == categoryId, cancellation);
+    }
+
+    public void DeleteCategory(ProductCategory category)
+    {
+        _context.ProductCategories.Remove(category);
+    }
+
+    public async Task<List<ProductCategory>> GetChildrenByParentCategoryId(int categoryId,
+                                                                           CancellationToken cancellation)
+    {
+        return await _context.ProductCategories.Where(p => p.ParentId == categoryId)
+                                               .ToListAsync(cancellation);
     }
     #endregion
 }

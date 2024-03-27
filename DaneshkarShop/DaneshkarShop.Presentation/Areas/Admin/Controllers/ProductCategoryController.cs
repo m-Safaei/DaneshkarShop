@@ -1,5 +1,6 @@
 ﻿using DaneshkarShop.Application.Services.Interface;
 using DaneshkarShop.Domain.DTOs.AdminSide.Product;
+using DaneshkarShop.Presentation.HttpManager;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DaneshkarShop.Presentation.Areas.Admin.Controllers
@@ -58,7 +59,13 @@ namespace DaneshkarShop.Presentation.Areas.Admin.Controllers
 
         public async Task<IActionResult> DeleteCategory(int categoryId, CancellationToken cancellation = default)
         {
-            return View();
+            var res = await _productCategoryService.DeleteProductCategory(categoryId, cancellation);
+            if (res)
+            {
+                return ApiResponse.SetResponse(ApiResponseStatus.Success, null, "عملیات با موفقیت انجام شد.");
+
+            }
+            return ApiResponse.SetResponse(ApiResponseStatus.Danger, null, "عملیات با شکست مواجه شده است.");
         }
 
         #endregion

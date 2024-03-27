@@ -10,6 +10,8 @@ public interface IProductCategoryService
     Task<List<ProductCategory>> ListOfProductCategories(CancellationToken cancellationToken);
 
     Task<bool> AddProductCategory(CreateProductCategoryDto model, CancellationToken cancellation);
+    Task<ProductCategory?> GetProductCategoryById(int categoryId, CancellationToken cancellation);
+    Task<bool> DeleteProductCategory(int categoryId, CancellationToken cancellation);
 
     #endregion
 }
