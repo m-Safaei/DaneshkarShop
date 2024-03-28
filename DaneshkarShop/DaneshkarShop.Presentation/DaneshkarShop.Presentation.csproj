@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DaneshkarShop.Data\DaneshkarShop.Data.csproj" />
-    <ProjectReference Include="..\DaneshkarShop.IOC\DaneshkarShop.IOC.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,7 +5,6 @@ using DaneshkarShop.Application.Services.Implementation;
 using DaneshkarShop.Application.Services.Interface;
 using DaneshkarShop.Data.Repositories;
 using DaneshkarShop.Domain.IRepositories;
-using DaneshkarShop.IOC;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace DaneshkarShop.Presentation
@@ -21,15 +20,16 @@ namespace DaneshkarShop.Presentation
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
-            #region IOC
-
-            RegisterServices(builder.Services);
-
-            #endregion
-
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
+            builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();
+            builder.Services.AddScoped<IContactUsService, ContactUsService>();
+            builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
             #region Context
-
+            
             builder.Services.AddDbContext<DaneshkarDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DaneshkarShopConnectionString"));
@@ -90,10 +90,6 @@ namespace DaneshkarShop.Presentation
 
             #endregion
 
-        }
-        public static void RegisterServices(IServiceCollection services)
-        {
-            DependencyContainer.RegisterServices(services);
         }
     }
 }
