@@ -23,13 +23,13 @@ public class AccountController : Controller
 
     #region Register
 
-    [HttpGet]
+    [HttpGet("Register")]
     public IActionResult Register()
     {
         return View();
     }
 
-    [HttpPost, ValidateAntiForgeryToken]
+    [HttpPost("Register"), ValidateAntiForgeryToken]
     public IActionResult Register(UserRegisterDTO userDTO)
     {
         if (ModelState.IsValid)
@@ -69,7 +69,7 @@ public class AccountController : Controller
         {
             // دریافت کاربر برای ست کردن کوکی
             var user = _userService.GetUserByMobile(userDTO.Mobile);
-            if (user != null)
+            if (user != null && user.Password == userDTO.Password)
             {
                 //Set Cookie
                 var claims = new List<Claim>

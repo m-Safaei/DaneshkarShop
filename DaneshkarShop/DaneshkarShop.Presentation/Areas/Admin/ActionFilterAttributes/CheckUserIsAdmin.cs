@@ -15,7 +15,7 @@ public class CheckUserIsAdmin : ActionFilterAttribute
         #region Check User Access
 
 
-        var userId = (int)context.HttpContext.User.GetUserId();
+        var userId = context.HttpContext.User.GetUserId();
 
         var result = service.IsUserAdmin(userId);
 
